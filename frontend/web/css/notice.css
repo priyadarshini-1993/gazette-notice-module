@@ -1,0 +1,116 @@
+/* ===== Container ===== */
+.notice-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* ===== Individual Notice ===== */
+.notice {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    padding: 25px 30px;
+    margin-bottom: 25px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.notice:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ===== Notice Title ===== */
+.notice h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.notice h2 a {
+    text-decoration: none;
+    color: #0072ce;
+    transition: color 0.2s;
+}
+
+.notice h2 a:hover {
+    color: #005bb5;
+}
+
+/* ===== Date ===== */
+.notice time {
+    font-size: 0.9rem;
+    color: #666;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* ===== Content ===== */
+.notice-content {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* ===== Pagination Container ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    flex-wrap: wrap;
+    gap: 8px; /* space between buttons */
+}
+
+/* ===== Page Items ===== */
+.pagination .page-item {
+    list-style: none;
+}
+
+/* ===== Page Links ===== */
+.pagination .page-link {
+    display: inline-block;
+    padding: 10px 16px;
+    min-width: 42px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #0072ce;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-decoration: none;
+    background-color: #fff;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* ===== Hover Effect ===== */
+.pagination .page-link:hover {
+    background-color: #0072ce;
+    color: #fff;
+    border-color: #0072ce;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+/* ===== Active Page ===== */
+.pagination .active .page-link {
+    background-color: #005bb5;
+    color: #fff;
+    border-color: #005bb5;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ===== Disabled Links ===== */
+.pagination .disabled .page-link {
+    color: #aaa;
+    border-color: #eee;
+    cursor: not-allowed;
+    background-color: #f9f9f9;
+}
+
+/* ===== Optional: First/Last & Arrows ===== */
+.pagination .page-link.arrow {
+    font-weight: bold;
+}
