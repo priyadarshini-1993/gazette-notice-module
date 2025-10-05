@@ -1,60 +1,97 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Advanced Project Template</h1>
-    <br>
-</p>
+### Gazette Notice Module — Drupal-style Feed Integration (Yii2)
 
-Yii 2 Advanced Project Template is a skeleton [Yii 2](https://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
+This project demonstrates a custom Yii2 module that consumes The Gazette REST API and displays published notices in a clean, paginated frontend interface.
 
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
 
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
+### Features
 
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
+* Fetches notices dynamically from The Gazette REST API
+* Displays:
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![build](https://github.com/yiisoft/yii2-app-advanced/workflows/build/badge.svg)](https://github.com/yiisoft/yii2-app-advanced/actions?query=workflow%3Abuild)
+  * Notice title (linked to the original Gazette notice)
+  * Publish date (formatted as “1 October 2021”)
+  * Content (HTML rendered safely)
+* Pagination: 10 results per page using Yii2’s `Pagination`
+* Semantic, accessible HTML5 markup
+* Styled with custom CSS (`notice.css`)
 
-DIRECTORY STRUCTURE
--------------------
 
-```
-common
-    config/              contains shared configurations
-    mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
-    tests/               contains tests for common classes    
-console
-    config/              contains console configurations
-    controllers/         contains console controllers (commands)
-    migrations/          contains database migrations
-    models/              contains console-specific model classes
-    runtime/             contains files generated during runtime
-backend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
-    controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for backend application    
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    tests/               contains tests for frontend application
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
-vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
-```
+### Project Setup
+
+1. Clone the repository
+
+   git clone https://github.com/priyadarshini-1993/gazette-notice-module.git
+   cd gazette-notice-module
+
+
+2. Install dependencies
+
+   composer install
+
+
+3. Run local server
+
+   1. From PHP built-in server
+
+       php yii serve --docroot="frontend/web" --port=8080
+
+       http://localhost:8080/notice
+
+    2. From Apache2
+      
+      * Edit your Apache virtual host config (/etc/apache2/sites-available/williams-lea.conf):
+
+      <VirtualHost *:80>
+            ServerName williams-lea.local
+            DocumentRoot /var/www/html/williams-lea-project/frontend/web
+
+        <Directory /var/www/html/williams-lea-project/frontend/web>
+            AllowOverride All
+            Require all granted
+        </Directory>
+
+            ErrorLog ${APACHE_LOG_DIR}/williams-lea-error.log
+            CustomLog ${APACHE_LOG_DIR}/williams-lea-access.log combined
+      </VirtualHost>
+
+      * Restart the server
+      
+      sudo systemctl restart apache2
+
+      http://williams-lea.local/notice
+
+
+### Important Files
+
+ `common/services/GazetteService.php`        =>  Handles API requests to The Gazette REST endpoint, decodes JSON data, and formats notice fields.  
+ `frontend/controllers/NoticeController.php` =>  Controller that calls the `GazetteService` and passes data to the view with pagination.           
+ `frontend/views/notice/index.php`           =>  Renders the list of Gazette notices in accessible HTML5 with links, dates, and formatted content. 
+ `frontend/web/css/notice.css`               =>  Custom stylesheet for layout and typography of the Gazette notices.                               
+ `frontend/config/main.php`                  =>  Includes the route configuration for the notice module and registers assets if needed.            
+ `composer.json`                             =>  Lists all project dependencies and autoload configurations.                                       
+
+
+### Technical Highlights
+
+* Uses Yii2 MVC structure and `ActiveDataProvider`-style pagination.
+* Uses Yii2’s `formatter->asRaw()` to render safe HTML content from API.
+* Includes custom styling via `notice.css` to ensure clean, readable layout.
+* Code structured to be easily extended into a reusable module or widget.
+
+
+### How to Test
+
+You’ll see a list of 10 notices with:
+
+   * Titles linking to Gazette
+   * Formatted dates
+   * Full content body
+   * Pagination at the bottom
+
+### Author
+
+Priyadarshini G
+
+mailto: darshini.uma07@gmail.com
+GitHub: https://github.com/priyadarshini-1993
+
